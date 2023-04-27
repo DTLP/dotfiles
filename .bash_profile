@@ -12,3 +12,4 @@ export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 export HISTCONTROL=ignoredups
 
 PS1='\n\e[33;1m\u@\h: \e[31m\w \e[0m $(__git_ps1 " (%s)")\n\$ '
+HISTTIMEFORMAT="%F %T "
