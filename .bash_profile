@@ -23,3 +23,13 @@ HISTTIMEFORMAT="%F %T "
 # kubectl autocomplete
 source /opt/homebrew/Cellar/bash-completion@2/2.11/share/bash-completion/bash_completion
 complete -o default -F __start_kubectl k
+
+# Check certificates
+function certp() {
+  if (( $# == 0 )) ; then
+    openssl x509 -in /dev/stdin -text -noout
+  else
+    openssl x509 -in $1 -text -noout
+  fi
+}
+# kubectl get secret <secret> -o json | jq -r '."data"."tls.crt"' | base64 -d | certp | rg Not
