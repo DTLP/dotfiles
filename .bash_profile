@@ -45,3 +45,8 @@ function certp() {
 }
 # Usage:
 # kubectl get secret <secret> -o json | jq -r '."data"."tls.crt"' | base64 -d | certp | rg Not
+
+# Open github at the current page
+alias open-git='cur=$(pwd); base=$(basename `git rev-parse --show-toplevel`); open $(echo $(git config remote.origin.url | sed "s/git@\(.*\):\(.*\).git/    https:\/\/\1\/\2/")/tree/$(git symbolic-ref --quiet --short HEAD )${cur#*$base})'
+# Usage (while in a git repo dir):
+# open-git
