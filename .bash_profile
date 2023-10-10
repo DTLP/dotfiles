@@ -28,7 +28,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 
 # K8s #############################################################################################
-export KUBECTL_EXTERNAL_DIFF=meld # kube diff using Meld
+export KUBECTL_EXTERNAL_DIFF=diffmerge # kube diff using DiffMerge
 # kubectl autocomplete
 source /opt/homebrew/Cellar/bash-completion@2/2.11/share/bash-completion/bash_completion
 complete -o default -F __start_kubectl k
