@@ -1,0 +1,15 @@
+# Workaround for the following error on MacOS
+# Unable to negotiate with <ip address> port 22: no matching key exchange method found. Their offer: diffie-hellman-group14-sha1,diffie-hellman-group1-sha1
+
+# Uncomment the two lines below:
+```
+    Ciphers aes128-ctr,aes192-ctr,aes256-ctr,aes128-cbc,3des-cbc
+    MACs hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-sha2-256
+ ```
+ # and append with `hmac-sha2-256`
+
+ # At the bottom of the file add the following lines:
+ ```
+HostkeyAlgorithms ssh-dss,ssh-rsa
+KexAlgorithms +diffie-hellman-group1-sha1,diffie-hellman-group14-sha1
+ ```
