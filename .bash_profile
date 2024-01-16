@@ -31,6 +31,8 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 export KUBECTL_EXTERNAL_DIFF=diffmerge # kube diff using DiffMerge
 # kubectl autocomplete
 source /opt/homebrew/Cellar/bash-completion@2/2.11/share/bash-completion/bash_completion
+# alternatively use this source:
+# source .kube/kubectl_autocompletion
 complete -o default -F __start_kubectl k
 
 
