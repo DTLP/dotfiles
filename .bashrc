@@ -19,8 +19,10 @@ HISTTIMEFORMAT="%F %T "
 
 # GO ##############################################################################################
 export GOPATH=$HOME/go
-export GOROOT="$(brew --prefix golang)/libexec"
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+if command -v brew &> /dev/null; then
+    export GOROOT="$(brew --prefix golang)/libexec"
+else
 
 
 # HOMEBREW ########################################################################################
