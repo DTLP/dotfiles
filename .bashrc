@@ -1,11 +1,13 @@
 # ALIASES #########################################################################################
 alias ll='ls -laG'
 alias k='kubectl'
-# Use GNU core utilities
-alias timeout=gtimeout
-alias date=gdate
-alias cp=gcp
 
+if [ "$(uname -s)" == "Darwin" ]; then
+  # Use GNU core utilities
+  alias timeout=gtimeout
+  alias date=gdate
+  alias cp=gcp
+fi
 
 # SHELL PROMPT ####################################################################################
 PS1='\[\e[33m\]\w \[\e[2m\]$(__git_ps1 "(%s)")\[\e[0m\]\n\$ '
@@ -22,17 +24,20 @@ export GOPATH=$HOME/go
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 if command -v brew &> /dev/null; then
     export GOROOT="$(brew --prefix golang)/libexec"
-else
+fi
 
 
 # HOMEBREW ########################################################################################
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
+if command -v brew &> /dev/null; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
 # K8s #############################################################################################
 export KUBECTL_EXTERNAL_DIFF=diffmerge # kube diff using DiffMerge
 # kubectl autocomplete
-source /opt/homebrew/Cellar/bash-completion@2/2.11/share/bash-completion/bash_completion
+if command -v brew &> /dev/null; then
+  source /opt/homebrew/Cellar/bash-completion@2/2.11/share/bash-completion/bash_completion
+fi
 # alternatively use this source:
 # source ~/.kube/kubectl_autocompletion
 complete -o default -F __start_kubectl k
