@@ -47,4 +47,11 @@ opt.linebreak = true
 --
 -- opt.vim_markdown_conceal = 0
 
-vim.g.mkdp_browser = "/Applications/Opera.app/Contents/MacOS/Opera"
+-- Set web browser path based on the OS
+if vim.fn.has("mac") or vim.fn.has("macunix") then
+  vim.g.mkdp_browser = "/Applications/Opera.app/Contents/MacOS/Opera"
+elseif vim.fn.has("unix") then
+  vim.g.mkdp_browser = "/path/to/your/linux/browser"
+elseif vim.fn.has("win32") or vim.fn.has("win64") then
+  vim.g.mkdp_browser = "C:\\Users\\pr0per\\AppData\\Local\\Programs\\Opera\\launcher.exe"
+end
