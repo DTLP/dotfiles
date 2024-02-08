@@ -1,6 +1,7 @@
 # ALIASES #########################################################################################
 alias ll='ls -laG'
 alias k='kubectl'
+alias v='nvim'
 
 if [ "$(uname -s)" == "Darwin" ]; then
   # Use GNU core utilities
