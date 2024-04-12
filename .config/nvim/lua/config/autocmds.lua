@@ -61,3 +61,5 @@ vim.api.nvim_create_autocmd("filetype", {
   pattern = { "go" },
   command = 'lua require("cmp").setup { enabled = true }',
 })
+
+vim.cmd([[autocmd BufWritePre *.go :silent! :GoFmt]])
