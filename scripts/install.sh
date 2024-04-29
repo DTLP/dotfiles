@@ -7,13 +7,12 @@ CONFIG_FILES=(
 	".config/nvim"
 	".config/alacritty"
 	".kube/kubectl_autocompletion"
-	".vim/autoload/plug.vim"
+	".vim"
 	".bashrc"
 	".git-prompt.sh"
 	".gitignore_global"
 	".prettierrc.json"
 	".tmux.conf"
-	".vimrc"
 )
 
 for file in "${CONFIG_FILES[@]}"; do
