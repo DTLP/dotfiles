@@ -37,9 +37,9 @@ fi
 # kubectl autocomplete
 if command -v brew &>/dev/null; then
 	source /opt/homebrew/Cellar/bash-completion@2/2.11/share/bash-completion/bash_completion
+else
+	source ~/.kube/kubectl_autocompletion
 fi
-# alternatively use this source:
-# source ~/.kube/kubectl_autocompletion
 complete -o default -F __start_kubectl k
 
 # FUNCTIONS #######################################################################################
