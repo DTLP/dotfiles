@@ -16,9 +16,7 @@ CONFIG_FILES=(
 )
 
 for file in "${CONFIG_FILES[@]}"; do
-	rm -rf "${HOME_DIR}/${file}"
-
-	ln -s "${DOTFILES_DIR}/${file}" "${HOME_DIR}/${file}"
+	ln -sf "${DOTFILES_DIR}/${file}" "${HOME_DIR}/${file}"
 done
 
 echo "All done!"
