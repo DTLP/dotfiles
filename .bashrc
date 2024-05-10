@@ -54,7 +54,7 @@ function certp() {
 # Usage:
 # kubectl get secret <secret> -o json | jq -r '."data"."tls.crt"' | base64 -d | certp | rg Not
 
-# Custom commands
+# CUSTOM COMMANDS #################################################################################
 # Open github page for current branch and dir
 alias git-open='cur=$(pwd); base=$(basename `git rev-parse --show-toplevel`); open $(echo $(git config remote.origin.url | sed "s/git@\(.*\):\(.*\).git/    https:\/\/\1\/\2/")/tree/$(git symbolic-ref --quiet --short HEAD )${cur#*$base})'
 # Delete current branch and update master
