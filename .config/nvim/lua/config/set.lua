@@ -29,3 +29,6 @@ vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80"
 
 vim.g.mapleader = " "
+
+-- Set conceallevel to 0 to always see concealed characters
+vim.opt.conceallevel = 0
