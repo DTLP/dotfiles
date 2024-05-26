@@ -1,5 +1,5 @@
 # ALIASES #########################################################################################
-alias ll='ls -laG'
+alias ll='ls -la --color=always'
 alias k='kubectl'
 alias v='nvim'
 
@@ -13,6 +13,9 @@ fi
 # SHELL PROMPT ####################################################################################
 PS1='\[\e[33m\]\w \[\e[2m\]$(__git_ps1 "(%s)")\[\e[0m\]\n\$ '
 source ~/.git-prompt.sh
+
+# Directory colours
+export LS_COLORS="di=0;33"
 
 # HISTORY #########################################################################################
 export HISTCONTROL=ignoredups
