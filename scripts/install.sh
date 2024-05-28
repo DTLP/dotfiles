@@ -6,11 +6,11 @@ DOTFILES_DIR="$(dirname $(pwd))"
 CONFIG_DIRS=(
 	".config/nvim"
 	".config/alacritty"
+	".kube"
 	".vim"
 )
 
 CONFIG_FILES=(
-	".kube/kubectl_autocompletion"
 	".bashrc"
 	".git-prompt.sh"
 	".gitignore_global"
