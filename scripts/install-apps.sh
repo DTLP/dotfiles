@@ -17,6 +17,10 @@ apt_apps=(
 )
 
 snap_apps=(
+	# containers
+	docker
+	kubectl
+
 	# entertainment
 	spotify
 
