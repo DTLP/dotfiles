@@ -10,6 +10,11 @@ if [ "$(uname -s)" == "Darwin" ]; then
 	alias cp=gcp
 fi
 
+# NEOVIM ##########################################################################################
+if command -v nvim &>/dev/null; then
+	export EDITOR="nvim"
+fi
+
 # SHELL PROMPT ####################################################################################
 PS1='\[\e[33m\]\w \[\e[2m\]$(__git_ps1 "(%s)")\[\e[0m\]\n\$ '
 source ~/.git-prompt.sh
