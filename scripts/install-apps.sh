@@ -18,24 +18,30 @@ apt_apps=(
 	# terminal
 	ldnsutils
 	# brew install ldns // drill
+	neofetch
+)
+
+flatpak_apps=(
+	# documentation
+	md.obsidian.Obsidian
+
+	# entertainment
+	com.spotify.Client
+
+	# gaming
+	com.discordapp.Discord
+
+	# messaging
+	org.telegram.desktop
+
+	# web
+	com.vivaldi.Vivaldi
 )
 
 snap_apps=(
 	# containers
 	docker
 	kubectl
-
-	# entertainment
-	spotify
-
-	# gaming
-	discord
-
-	# messaging
-	telegram-desktop
-
-	# note taking
-	obsidian
 
 	# programming
 	go
@@ -44,11 +50,8 @@ snap_apps=(
 	alacritty
 	htop
 	nvim
-	tmux
-
-	# web browsing
-	opera
 	ripgrep
+	tmux
 )
 
 go_packages=(
@@ -58,18 +61,29 @@ go_packages=(
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-# apt apps
+# apt
 for app in "${apt_apps[@]}"; do
 	echo -e "- Installing ${YELLOW}${app}${NC} ..."
 	sudo apt install "${app}" -y
 done
 
-# snap apps
+# snap
 for app in "${snap_apps[@]}"; do
 	echo -e "- Installing ${YELLOW}${app}${NC} ..."
 	if ! sudo snap install "${app}"; then
 		sudo snap install "${app}" --classic
 	fi
+done
+
+# flatpak
+## Get repo file
+flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+## Reinstall ca-certificates
+# sudo apt install --reinstall ca-certificates
+## Get packages
+for app in "${flatpak_apps[@]}"; do
+	echo -e "- Installing ${YELLOW}${app}${NC} ..."
+	sudo flatpak install flathub ${app} -y
 done
 
 # go packages
