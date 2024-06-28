@@ -4,8 +4,9 @@ HOME_DIR="${HOME}"
 DOTFILES_DIR="$(dirname $(pwd))"
 
 CONFIG_DIRS=(
-	".config/nvim"
 	".config/alacritty"
+	".config/nvim"
+	".config/helix"
 	".kube"
 	".vim"
 )
