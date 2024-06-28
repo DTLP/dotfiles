@@ -9,4 +9,7 @@ return {
       vim.cmd([[silent! GoInstallDeps]])
     end,
   },
+  {
+    "fatih/vim-go",
+  },
 }
