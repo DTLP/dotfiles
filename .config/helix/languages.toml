@@ -1,0 +1,14 @@
+[[language]]
+name = "markdown"
+rulers = [80]
+
+[[language]]
+name = "go"
+scope = "source.go"
+injection-regex = "go"
+file-types = ["go"]
+roots = ["go.mod"]
+auto-format = true
+comment-token = "//"
+formatter = { command = "goimports" }
+indent = { tab-width = 4, unit = "\t" }
