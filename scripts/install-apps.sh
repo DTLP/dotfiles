@@ -48,6 +48,7 @@ snap_apps=(
 
 	# terminal
 	alacritty
+	helix
 	htop
 	nvim
 	ripgrep
