@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 
 apt_apps=(
-	# gaming
-	steam
-
 	# package management
 	npm
 	snapd
@@ -12,30 +9,9 @@ apt_apps=(
 	python3-pip
 	python3.10-venv
 
-	# security
-	keepass2
-
 	# terminal
 	ldnsutils
 	# brew install ldns // drill
-	neofetch
-)
-
-flatpak_apps=(
-	# documentation
-	md.obsidian.Obsidian
-
-	# entertainment
-	com.spotify.Client
-
-	# gaming
-	com.discordapp.Discord
-
-	# messaging
-	org.telegram.desktop
-
-	# web
-	com.vivaldi.Vivaldi
 )
 
 snap_apps=(
@@ -48,7 +24,7 @@ snap_apps=(
 
 	# terminal
 	alacritty
-	helix
+	#helix
 	htop
 	nvim
 	ripgrep
@@ -74,17 +50,6 @@ for app in "${snap_apps[@]}"; do
 	if ! sudo snap install "${app}"; then
 		sudo snap install "${app}" --classic
 	fi
-done
-
-# flatpak
-## Get repo file
-flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-## Reinstall ca-certificates
-# sudo apt install --reinstall ca-certificates
-## Get packages
-for app in "${flatpak_apps[@]}"; do
-	echo -e "- Installing ${YELLOW}${app}${NC} ..."
-	sudo flatpak install flathub ${app} -y
 done
 
 # go packages
