@@ -71,3 +71,7 @@ alias git-branch-delete='main=$(git symbolic-ref refs/remotes/origin/HEAD | sed 
 # Recreate current branch after fetching master
 alias git-branch-reset='main=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'); \
   branch=$(git rev-parse --abbrev-ref HEAD); git checkout ${main}; git branch -D ${branch}; git pull; git checkout -b ${branch}'
+
+# OTHER ###########################################################################################
+# Spotify themes
+export PATH=$PATH:$HOME/.spicetify

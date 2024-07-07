@@ -21,6 +21,10 @@ mv Flatery-master/Flatery-Dark ~/.icons/Flatery-Dark
 rm -rf Flatery-master
 rm Flatery-Black.zip
 
+# Spotify - https://spicetify.app/docs/advanced-usage/installation/#note-for-linux-users
+curl -fsSL https://raw.githubusercontent.com/spicetify/cli/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/Astromations/Hazy/main/install.sh | sh
+
 echo -e "\
 ------------------------------\n\
 Manual steps:
