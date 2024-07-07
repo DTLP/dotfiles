@@ -50,6 +50,10 @@ else
 fi
 complete -o default -F __start_kubectl k
 
+# NEOVIM ##########################################################################################
+# export PATH="$PATH:/opt/nvim-linux64/bin"
+export GIT_EDITOR="nvim"
+
 # FUNCTIONS #######################################################################################
 # Check certificates
 function certp() {
