@@ -26,6 +26,7 @@ flatpak_apps=(
 
 	# web
 	com.vivaldi.Vivaldi
+	io.github.zen_browser.zen
 )
 
 YELLOW='\033[1;33m'
