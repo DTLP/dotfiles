@@ -4,6 +4,7 @@ HOME_DIR="${HOME}"
 DOTFILES_DIR="$(dirname $(pwd))"
 
 CONFIG_DIRS=(
+	"bin"
 	".config/alacritty"
 	".config/nvim"
 	".config/helix"
