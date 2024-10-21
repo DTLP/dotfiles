@@ -4,15 +4,15 @@ alias k='kubectl'
 alias v='nvim'
 
 if [ "$(uname -s)" == "Darwin" ]; then
-	# Use GNU core utilities
-	alias timeout=gtimeout
-	alias date=gdate
-	alias cp=gcp
+  # Use GNU core utilities
+  alias timeout=gtimeout
+  alias date=gdate
+  alias cp=gcp
 fi
 
 # NEOVIM ##########################################################################################
 if command -v nvim &>/dev/null; then
-	export EDITOR="nvim"
+  export EDITOR="nvim"
 fi
 
 # SHELL PROMPT ####################################################################################
@@ -30,23 +30,23 @@ HISTTIMEFORMAT="%F %T "
 export GOPATH=$HOME/go
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 if command -v brew &>/dev/null; then
-	export GOROOT="$(brew --prefix golang)/libexec"
+  export GOROOT="$(brew --prefix golang)/libexec"
 fi
 
 # HOMEBREW ########################################################################################
 if command -v brew &>/dev/null; then
-	eval "$(/opt/homebrew/bin/brew shellenv)"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 # K8s #############################################################################################
 if command -v diffmerge &>/dev/null; then
-	export KUBECTL_EXTERNAL_DIFF=diffmerge # kube diff using DiffMerge
+  export KUBECTL_EXTERNAL_DIFF=diffmerge # kube diff using DiffMerge
 fi
 # kubectl autocomplete
 if command -v brew &>/dev/null; then
-	source /opt/homebrew/Cellar/bash-completion@2/2.11/share/bash-completion/bash_completion
+  source /opt/homebrew/Cellar/bash-completion@2/2.11/share/bash-completion/bash_completion
 else
-	source ~/.kube/kubectl_autocompletion
+  source ~/.kube/kubectl_autocompletion
 fi
 complete -o default -F __start_kubectl k
 
@@ -57,11 +57,11 @@ export GIT_EDITOR="nvim"
 # FUNCTIONS #######################################################################################
 # Check certificates
 function certp() {
-	if (($# == 0)); then
-		openssl x509 -in /dev/stdin -text -noout
-	else
-		openssl x509 -in $1 -text -noout
-	fi
+  if (($# == 0)); then
+    openssl x509 -in /dev/stdin -text -noout
+  else
+    openssl x509 -in $1 -text -noout
+  fi
 }
 # Usage:
 # kubectl get secret <secret> -o json | jq -r '."data"."tls.crt"' | base64 -d | certp | rg Not
