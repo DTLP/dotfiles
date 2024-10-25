@@ -25,9 +25,6 @@ flatpak_apps=(
   # gaming
   com.discordapp.Discord
 
-  # messaging
-  org.telegram.desktop
-
   # web
   com.vivaldi.Vivaldi
   io.github.zen_browser.zen
@@ -35,6 +32,7 @@ flatpak_apps=(
 
 other_apps=(
   dropbox
+  telegram
 )
 
 YELLOW='\033[1;33m'
