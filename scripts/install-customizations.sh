@@ -23,6 +23,20 @@ curl -Lo \
 gnome-extensions install sound-output-device-chooserkgshank.net.v41.shell-extension.zip
 rm sound-output-device-chooserkgshank.net.v41.shell-extension.zip
 
+# gnome-nvidia-extension by ethanwharris
+curl -Lo \
+  nvidiautilethanwharris.v12.shell-extension.zip \
+  https://extensions.gnome.org/extension-data/nvidiautilethanwharris.v12.shell-extension.zip
+gnome-extensions install nvidiautilethanwharris.v12.shell-extension.zip
+rm nvidiautilethanwharris.v12.shell-extension.zip
+
+# vitals by corecoding
+curl -Lo \
+  VitalsCoreCoding.com.v61.shell-extension.zip \
+  https://extensions.gnome.org/extension-data/VitalsCoreCoding.com.v61.shell-extension.zip
+gnome-extensions install VitalsCoreCoding.com.v61.shell-extension.zip
+rm VitalsCoreCoding.com.v61.shell-extension.zip
+
 echo -e "\
 ------------------------------\n\
 Manual steps:
