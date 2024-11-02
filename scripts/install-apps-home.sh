@@ -10,6 +10,7 @@ apt_apps=(
   # tools
   caffeine
   keepass2
+  plocate
 
   # terminal
   neofetch
