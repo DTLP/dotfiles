@@ -27,6 +27,7 @@ flatpak_apps=(
   com.discordapp.Discord
 
   # web
+  com.opera.Opera
   com.vivaldi.Vivaldi
   io.github.zen_browser.zen
 )
