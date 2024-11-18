@@ -16,6 +16,7 @@ other_apps=(
   docker
   go
   kubectl
+  kustomize
   nvim
   strongbox
   tmux
