@@ -8,6 +8,7 @@ apt_apps=(
   steam
 
   # tools
+  ansible
   caffeine
   keepass2
   plocate
