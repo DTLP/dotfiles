@@ -20,6 +20,7 @@ other_apps=(
   nvim
   strongbox
   tmux
+  yq
 )
 
 YELLOW='\033[1;33m'
