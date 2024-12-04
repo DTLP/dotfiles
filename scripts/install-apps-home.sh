@@ -36,6 +36,7 @@ flatpak_apps=(
 other_apps=(
   dropbox
   telegram
+  terraform
 )
 
 YELLOW='\033[1;33m'
