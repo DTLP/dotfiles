@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
 apt_apps=(
+  # containers
+  docker-compose
+
   # programming
   python3-pip
   python3.10-venv
