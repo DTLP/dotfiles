@@ -16,6 +16,7 @@ apt_apps=(
 
 other_apps=(
   alacritty
+  difftastic
   docker
   go
   kubectl
