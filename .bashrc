@@ -43,8 +43,8 @@ if command -v brew &>/dev/null; then
 fi
 
 # K8s #############################################################################################
-if command -v diffmerge &>/dev/null; then
-  export KUBECTL_EXTERNAL_DIFF=diffmerge # kube diff using DiffMerge
+if command -v difft &>/dev/null; then
+  export KUBECTL_EXTERNAL_DIFF=difft # kube diff using Difftastic
 fi
 # kubectl autocomplete
 if command -v brew &>/dev/null; then
