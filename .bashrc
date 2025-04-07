@@ -11,7 +11,7 @@ if [ "$(uname -s)" == "Darwin" ]; then
 fi
 
 # NEOVIM ##########################################################################################
-export PATH="$PATH:/opt/nvim-linux64/bin"
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 
 if command -v nvim &>/dev/null; then
   export EDITOR="nvim"
