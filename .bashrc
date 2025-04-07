@@ -84,3 +84,6 @@ alias git-branch-reset='main=$(git symbolic-ref refs/remotes/origin/HEAD | sed '
   branch=$(git rev-parse --abbrev-ref HEAD); git checkout ${main}; git branch -D ${branch}; git pull; git checkout -b ${branch}'
 
 # OTHER ###########################################################################################
+## protontricks
+alias protontricks='flatpak run com.github.Matoking.protontricks'
+alias protontricks-launch='flatpak run --command=protontricks-launch com.github.Matoking.protontricks'
