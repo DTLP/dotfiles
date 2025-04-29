@@ -58,6 +58,9 @@ complete -o default -F __start_kubectl k
 # export PATH="$PATH:/opt/nvim-linux64/bin"
 export GIT_EDITOR="nvim"
 
+# TALOS ###########################################################################################
+source ~/.talos/talosctl_autocompletion
+
 # FUNCTIONS #######################################################################################
 # Check certificates
 function certp() {
