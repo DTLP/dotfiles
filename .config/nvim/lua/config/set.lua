@@ -13,6 +13,13 @@ vim.opt.smartindent = true
 
 vim.opt.wrap = false
 
+vim.opt.ignorecase = true
+
+-- Use tree-sitter for code folding
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldenable = false
+
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
