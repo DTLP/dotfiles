@@ -15,6 +15,11 @@ opt.spell = false
 opt.foldmethod = "manual"
 opt.foldenable = false
 
--- Set web browser path
+-- iamcco/markdown-preview
+vim.cmd([[
+  function! OpenMarkdownPreview(url)
+    execute "silent !xdg-open " . a:url
+  endfunction
+]])
 
-vim.g.mkdp_browser = "C:\\Users\\pr0per\\AppData\\Local\\Programs\\Opera\\launcher.exe"
+vim.g.mkdp_browserfunc = "OpenMarkdownPreview"
