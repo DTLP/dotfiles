@@ -63,6 +63,12 @@ source ~/.talos/talosctl_autocompletion
 
 # FUNCTIONS #######################################################################################
 # Check certificates
+function certg() {
+  printf "openssl s_client -showcerts -connect $1:443 </dev/null | openssl x509 -text"
+  openssl s_client -showcerts -connect $1:443 </dev/null | openssl x509 -text
+}
+## Usage:
+## $ certg google.com 2>/dev/null | rg After
 function certp() {
   if (($# == 0)); then
     openssl x509 -in /dev/stdin -text -noout
@@ -70,8 +76,8 @@ function certp() {
     openssl x509 -in $1 -text -noout
   fi
 }
-# Usage:
-# kubectl get secret <secret> -o json | jq -r '."data"."tls.crt"' | base64 -d | certp | rg Not
+## Usage:
+## $ kubectl get secret <secret> -o json | jq -r '."data"."tls.crt"' | base64 -d | certp | rg Not
 
 # CUSTOM COMMANDS #################################################################################
 export PATH="$HOME/bin:$PATH"
