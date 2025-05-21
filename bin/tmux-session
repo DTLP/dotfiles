@@ -1,16 +1,19 @@
 #!/usr/bin/env bash
-# Save and restore the state of tmux sessions and windows.
-#
-# TODO: persist and restore the state & position of panes.
+# Save and restore tmux sessions, windows, panes, and layout in correct order.
 set -e
+
+SESSION_FILE="${HOME}/.tmux-session"
 
 dump() {
   local d=$'\t'
-  tmux list-windows -a -F "#S${d}#W${d}#{pane_current_path}"
+  # Save: session, window index, window name, pane index, path, layout
+  tmux list-panes -a -F "#S${d}#{window_index}${d}#W${d}#{pane_index}${d}#{pane_current_path}${d}#{window_layout}" |
+    sort -t$'\t' -k1,1 -k2n -k4n >"$SESSION_FILE"
 }
 
 save() {
-  dump > ~/.tmux-session
+  dump
+  echo "Session saved to $SESSION_FILE"
 }
 
 terminal_size() {
@@ -21,39 +24,53 @@ session_exists() {
   tmux has-session -t "$1" 2>/dev/null
 }
 
-add_window() {
-  tmux new-window -d -t "$1:" -n "$2" -c "$3"
-}
-
-new_session() {
-  cd "$3" &&
-  tmux new-session -d -s "$1" -n "$2" $4
-}
-
 restore() {
   tmux start-server
-  local count=0
-  local dimensions="$(terminal_size)"
+  local dimensions
+  dimensions="$(terminal_size)"
 
-  while IFS=$'\t' read session_name window_name dir; do
-    if [[ -d "$dir" && $window_name != "log" && $window_name != "man" ]]; then
-      if session_exists "$session_name"; then
-        add_window "$session_name" "$window_name" "$dir"
-      else
-        new_session "$session_name" "$window_name" "$dir" "$dimensions"
-        count=$(( count + 1 ))
-      fi
+  local current_session=""
+  local current_window=""
+  local current_window_index=""
+  local created_windows=()
+
+  while IFS=$'\t' read session_name window_index window_name pane_index pane_path layout; do
+    [[ ! -d "$pane_path" ]] && continue
+
+    # New session
+    if ! session_exists "$session_name"; then
+      tmux new-session -d -s "$session_name" -n "$window_name" -c "$pane_path" $dimensions
+      current_session="$session_name"
+      current_window="$window_name"
+      current_window_index="$window_index"
+      created_windows+=("$session_name:$window_name")
+      continue
     fi
-  done < ~/.tmux-session
 
-  echo "restored $count sessions"
+    # Existing session, new window
+    if [[ "$current_session" != "$session_name" || "$current_window_index" != "$window_index" ]]; then
+      tmux new-window -d -t "$session_name:$window_index" -n "$window_name" -c "$pane_path"
+      current_session="$session_name"
+      current_window="$window_name"
+      current_window_index="$window_index"
+      created_windows+=("$session_name:$window_name")
+      continue
+    fi
+
+    # Same window: create new pane
+    tmux split-window -t "$session_name:$window_name" -c "$pane_path"
+    tmux select-layout -t "$session_name:$window_name" "$layout" 2>/dev/null || true
+  done <"$SESSION_FILE"
+
+  echo "Restored sessions with window and pane layouts"
 }
 
 case "$1" in
-save | restore )
+save | restore)
   $1
   ;;
-* )
-  echo "valid commands: save, restore" >&2
+*)
+  echo "Valid commands: save, restore" >&2
   exit 1
+  ;;
 esac
