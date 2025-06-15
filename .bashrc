@@ -58,6 +58,12 @@ complete -o default -F __start_kubectl k
 # export PATH="$PATH:/opt/nvim-linux64/bin"
 export GIT_EDITOR="nvim"
 
+# POP!_OS #########################################################################################
+if grep -q 'Pop!_OS' /etc/os-release; then
+  # Black screen fix - https://askubuntu.com/questions/1408394
+  xset -dpms
+fi
+
 # TALOS ###########################################################################################
 source ~/.talos/talosctl_autocompletion
 
