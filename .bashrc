@@ -1,10 +1,11 @@
 # ALIASES #########################################################################################
 alias ll='ls -la --color=always'
 alias k='kubectl'
+alias tf='terraform'
 alias v='nvim'
 
 if [ "$(uname -s)" == "Darwin" ]; then
-  # Use GNU core utilities
+  # Use GNU core utilities on macOS (requires coreutils).
   alias timeout=gtimeout
   alias date=gdate
   alias cp=gcp
