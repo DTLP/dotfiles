@@ -7,9 +7,7 @@ CONFIG_DIRS=(
   "bin"
   ".config/alacritty"
   ".config/nvim"
-  ".config/helix"
   ".kube"
-  ".talos"
   ".vim"
 )
 
@@ -19,7 +17,6 @@ CONFIG_FILES=(
   ".gitignore_global"
   ".prettierrc.json"
   ".tmux.conf"
-  ".config/spicetify/config-xpui.ini"
 )
 
 for dir in "${CONFIG_DIRS[@]}"; do
