@@ -1,79 +1,92 @@
 #![enable(implicit_some)]
 #![enable(unwrap_newtypes)]
 #![enable(unwrap_variant_newtypes)]
+
 (
   components: {
     "header": Split(
-      direction: Vertical,
+      direction: Horizontal,
       panes: [
         (
-          pane: Split(
-            direction: Horizontal,
-            panes: [
-              (
-                pane: Pane(Property(
-                  content: [
-                    (
-                      kind: Property(Song(Artist)),
-                      style: (fg: "#e3a14b", modifiers: "Bold"),
-                      default: (kind: Text("Unknown Artist"), style: (fg: "#e3a14b", modifiers: "Bold"))
-                    ),
-                  ],
-                  align: Left
-                )),
-                size: "100",
-              ),
-              (
-                size: "100%",
-                pane: Pane(Property(
-                  content: [
-                    (kind: Property(Widget(Volume)), style: (fg: "white"))
-                  ],
-                  align: Right
-                )),
-              ),
-            ]
-          ),
-          size: "1",
+          pane: Pane(Property(
+            content: [
+              (kind: Property(Widget(Volume)), style: (fg: "white"))
+            ],
+            align: Left
+          )),
+          size: "50%",
         ),
         (
-          pane: Split(
-            direction: Horizontal,
-            panes: [
+          pane: Pane(Property(
+            content: [
               (
-                pane: Pane(Property(
-                  content: [
-                    (
-                      kind: Property(Song(Title)),
-                      style: (modifiers: "Bold"),
-                      default: (kind: Text("Unknown Artist"), style: (modifiers: "Bold"))
-                    ),
-                  ],
-                  align: Left
-                )),
-                size: "100",
+                kind: Property(Widget(States(
+                  active_style: (fg: "blue", modifiers: "Bold"),
+                  separator_style: (fg: "white")
+                ))),
+                style: (fg: "white")
               ),
-              (
-                size: "100%",
-                pane: Pane(Property(
-                  content: [
-                    (
-                      kind: Property(Widget(States(
-                        active_style: (fg: "blue", modifiers: "Bold"),
-                        separator_style: (fg: "white")
-                      ))),
-                      style: (fg: "white")
-                    ),
-                  ],
-                  align: Right
-                )),
-              ),
-            ]
-          ),
-          size: "1",
+            ],
+            align: Right
+          )),
+          size: "50%",
         ),
       ]
     ),
+
+    "track_meta": Split(
+      direction: Vertical,
+      panes: [
+        (
+          pane: Pane(Property(
+            content: [
+              (
+                kind: Property(Song(Artist)),
+                style: (fg: "#e3a14b", modifiers: "Bold"),
+                default: (
+                  kind: Text("Unknown Artist"),
+                  style: (fg: "#e3a14b", modifiers: "Bold")
+                )
+              )
+            ],
+            align: Center
+          )),
+          size: "1",
+        ),
+
+        (
+          pane: Pane(Property(
+            content: [
+              (
+                kind: Property(Song(Title)),
+                style: (modifiers: "Bold"),
+                default: (
+                  kind: Text("Unknown Title"),
+                  style: (modifiers: "Bold")
+                )
+              )
+            ],
+            align: Center
+          )),
+          size: "1",
+        ),
+
+        (
+          pane: Pane(Property(
+            content: [
+              (
+                kind: Property(Song(Album)),
+                style: (fg: "gray")
+              )
+            ],
+            align: Center
+          )),
+          size: "1",
+        ),
+
+      ]
+    ),
+
     "progress_bar": Split(
       direction: Horizontal,
       panes: [
@@ -112,16 +125,36 @@
         ),
       ]
     ),
+
   },
+
   layout: Split(
     direction: Vertical,
     panes: [
       (pane: Pane(Tabs), size: "2"),
       (pane: Pane(TabContent), size: "100%"),
-      (pane: Component("header"), size: "2"),
+      (pane: Component("track_meta"), size: "3"),
+      (pane: Component("header"), size: "1"),
       (pane: Component("progress_bar"), size: "1"),
     ],
   ),
+
+  song_table_format: [
+    (
+      prop: (kind: Property(Artist)),
+      width: "45%",
+    ),
+    (
+      prop: (kind: Property(Title)),
+      width: "45%",
+    ),
+    (
+      prop: (kind: Property(Duration)),
+      width: "10%",
+      alignment: Right,
+    ),
+  ],
+
   progress_bar: (
     symbols: ["", "█", "", "█", ""],
     track_style: (fg: "#1e2030"),
