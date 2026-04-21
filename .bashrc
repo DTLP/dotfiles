@@ -55,6 +55,38 @@ else
 fi
 complete -o default -F __start_kubectl k
 
+## ARGO CD ########################################################################################
+# Turns Argo on/off in Namespaces
+# $1 cluster
+# $2 namespace
+# $3 on/off/hard-refresh/status switch
+argoctl() {
+  if [[ -z $1 || -z $2 || -z ${3:-} ]]; then
+    echo "Usage: argoctl CLUSTER NAMESPACE {on|off|hr|hard-refresh}"
+    return 1
+  fi
+
+  case "$3" in
+  'on')
+    kubectl --context "$1" -n "$2" patch --type='merge' applications.argoproj.io "$2" -p '{"spec":{"syncPolicy":{"automated":{"prune":true,"selfHeal":true}}}}'
+    ;;
+  'off')
+    kubectl --context "$1" -n "$2" patch --type='merge' applications.argoproj.io "$2" -p '{"spec":{"syncPolicy":{"automated":null}}}'
+    ;;
+  'hr' | 'hard-refresh')
+    kubectl --context "$1" -n "$2" annotate app "$2" 'argocd.argoproj.io/refresh=hard' --overwrite
+    ;;
+  'status')
+    if kubectl --context "$1" -n "$2" get applications.argoproj.io "$2" -o jsonpath='{.spec.syncPolicy.automated}' | grep -q .; then echo "Enabled"; else echo "Disabled"; fi
+    ;;
+  *)
+    echo "Invalid option: $3"
+    echo "Usage: argoctl CLUSTER NAMESPACE {on|off|hr|hard-refresh}"
+    return 1
+    ;;
+  esac
+}
+
 # NEOVIM ##########################################################################################
 # export PATH="$PATH:/opt/nvim-linux64/bin"
 export GIT_EDITOR="nvim"
