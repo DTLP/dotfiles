@@ -33,6 +33,12 @@ flatpak_apps=(
   dev.lizardbyte.app.Sunshine
   net.davidotek.pupgui2 # ProtonUp-Qt
 
+  # tools
+  com.obsproject.Studio
+  com.slack.Slack
+  io.ente.photos
+  org.keepassxc.KeePassXC
+
   # web
   com.brave.Browser
   com.opera.Opera
