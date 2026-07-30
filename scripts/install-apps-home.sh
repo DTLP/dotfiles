@@ -22,7 +22,9 @@ flatpak_apps=(
   md.obsidian.Obsidian
 
   # entertainment
+  org.jeffvli.feishin
   com.spotify.Client
+  org.videolan.VLC
 
   # gaming
   com.discordapp.Discord
