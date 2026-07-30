@@ -56,7 +56,7 @@ flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/fl
 ## Get packages
 for app in "${flatpak_apps[@]}"; do
   echo -e "- Installing ${YELLOW}${app}${NC} ..."
-  sudo flatpak install flathub ${app} -y
+  flatpak install --user flathub ${app} -y
 done
 
 # other apps
