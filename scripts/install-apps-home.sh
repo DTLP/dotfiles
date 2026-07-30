@@ -28,6 +28,10 @@ flatpak_apps=(
 
   # gaming
   com.discordapp.Discord
+  com.github.Matoking.protontricks
+  com.mojang.Minecraft
+  dev.lizardbyte.app.Sunshine
+  net.davidotek.pupgui2 # ProtonUp-Qt
 
   # web
   com.brave.Browser
