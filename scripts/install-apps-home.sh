@@ -60,7 +60,7 @@ for app in "${flatpak_apps[@]}"; do
 done
 
 # other apps
-for app in "${other_apps[@]"; do
+for app in "${other_apps[@]}"; do
   echo -e "- Installing ${YELLOW}${app}${NC} ..."
   ./tools/${app}.sh
 done
