@@ -103,8 +103,12 @@ source ~/.talos/talosctl_autocompletion
 # FUNCTIONS #######################################################################################
 # Check certificates
 function certg() {
-  printf "openssl s_client -showcerts -connect $1:443 </dev/null | openssl x509 -text"
-  openssl s_client -showcerts -connect $1:443 </dev/null | openssl x509 -text
+  if (($# == 0)); then
+    echo "Usage: certg HOST" >&2
+    return 1
+  fi
+  local host="$1"
+  openssl s_client -showcerts -connect "${host}:443" </dev/null | openssl x509 -text
 }
 ## Usage:
 ## $ certg google.com 2>/dev/null | rg After
@@ -112,7 +116,8 @@ function certp() {
   if (($# == 0)); then
     openssl x509 -in /dev/stdin -text -noout
   else
-    openssl x509 -in $1 -text -noout
+    local cert="$1"
+    openssl x509 -in "${cert}" -text -noout
   fi
 }
 ## Usage:
