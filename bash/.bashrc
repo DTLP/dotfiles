@@ -127,14 +127,62 @@ function certp() {
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
-# Open github page for current branch and dir
-alias git-open='cur=$(pwd); base=$(basename `git rev-parse --show-toplevel`); open $(echo $(git config remote.origin.url | sed "s/git@\(.*\):\(.*\).git/    https:\/\/\1\/\2/")/tree/$(git symbolic-ref --quiet --short HEAD )${cur#*$base})'
-# Delete current branch and update master
-alias git-branch-delete='main=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'); \
-  branch=$(git rev-parse --abbrev-ref HEAD); git checkout ${main}; git branch -D ${branch}; git pull;'
-# Recreate current branch after fetching master
-alias git-branch-reset='main=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'); \
-  branch=$(git rev-parse --abbrev-ref HEAD); git checkout ${main}; git branch -D ${branch}; git pull; git checkout -b ${branch}'
+# Open the repo page for the current branch and directory
+function git-open() {
+  local opener url branch relpath
+  if command -v open &>/dev/null; then
+    opener="open"
+  elif command -v xdg-open &>/dev/null; then
+    opener="xdg-open"
+  else
+    echo "git-open: no browser opener found (open/xdg-open)" >&2
+    return 1
+  fi
+
+  url="$(git config --get remote.origin.url)"
+  case "$url" in
+  git@*)
+    url="${url#git@}"
+    url="https://${url/:/\/}"
+    ;;
+  git://*)
+    url="https://${url#git://}"
+    ;;
+  esac
+  url="${url%.git}"
+
+  branch="$(git symbolic-ref --quiet --short HEAD)"
+  relpath="${PWD#"$(git rev-parse --show-toplevel)"/}"
+  [[ -n "$relpath" ]] && relpath="/${relpath}"
+
+  "$opener" "${url}/tree/${branch}${relpath}"
+}
+
+# Switch to the default branch and remove the current one
+# Usage: git-branch {delete|reset}
+function git-branch() {
+  local main branch
+  main="$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')"
+  branch="$(git rev-parse --abbrev-ref HEAD)"
+
+  case "$1" in
+  delete)
+    git checkout "${main}"
+    git branch -D "${branch}"
+    git pull
+    ;;
+  reset)
+    git checkout "${main}"
+    git branch -D "${branch}"
+    git pull
+    git checkout -b "${branch}"
+    ;;
+  *)
+    echo "Usage: git-branch {delete|reset}" >&2
+    return 1
+    ;;
+  esac
+}
 
 # OTHER ###########################################################################################
 ## protontricks
