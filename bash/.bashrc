@@ -55,6 +55,10 @@ else
 fi
 complete -o default -F __start_kubectl k
 
+# opencode ########################################################################################
+export PATH=$HOME/.opencode/bin:$PATH
+alias oc='opencode'
+
 ## ARGO CD ########################################################################################
 # Turns Argo on/off in Namespaces
 # $1 cluster
