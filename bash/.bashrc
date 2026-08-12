@@ -28,6 +28,12 @@ export LS_COLORS="di=0;33"
 export HISTCONTROL=ignoredups
 HISTTIMEFORMAT="%F %T "
 
+# SSH #############################################################################################
+#if ! ssh-add -l >/dev/null 2>&1; then
+#  eval "$(ssh-agent -s)" >/dev/null
+#  ssh-add ~/.ssh/id_ed25519
+#fi
+
 # GO ##############################################################################################
 export GOPATH=$HOME/go
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
@@ -157,7 +163,9 @@ function git-open() {
   url="${url%.git}"
 
   branch="$(git symbolic-ref --quiet --short HEAD)"
-  relpath="${PWD#"$(git rev-parse --show-toplevel)"/}"
+  toplevel="$(git rev-parse --show-toplevel)"
+  relpath="${PWD#"$toplevel"}"
+  relpath="${relpath#/}"
   [[ -n "$relpath" ]] && relpath="/${relpath}"
 
   "$opener" "${url}/tree/${branch}${relpath}"
