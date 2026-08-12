@@ -1,6 +1,5 @@
 # ALIASES #########################################################################################
 alias ll='ls -la --color=always'
-alias k='kubectl'
 alias tf='terraform'
 alias v='nvim'
 
@@ -44,6 +43,8 @@ if command -v brew &>/dev/null; then
 fi
 
 # K8s #############################################################################################
+alias k='kubectl'
+
 if command -v difft &>/dev/null; then
   export KUBECTL_EXTERNAL_DIFF=difft # kube diff using Difftastic
 fi
