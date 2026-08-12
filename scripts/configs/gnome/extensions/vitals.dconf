@@ -1,0 +1,10 @@
+[/]
+battery-slot=3
+hide-icons=false
+hide-zeros=false
+hot-sensors=['_memory_usage_', '__network-rx_max__', '__temperature_avg__', '_processor_usage_', '__network-tx_max__', '_storage_free_']
+network-speed-format=0
+position-in-panel=0
+show-battery=false
+show-storage=true
+storage-measurement=1

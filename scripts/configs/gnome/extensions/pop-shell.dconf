@@ -1,0 +1,8 @@
+[/]
+active-hint=false
+active-hint-border-radius=uint32 1
+focus-left=['<Super>Left', '<Super>KP_Left']
+gap-inner=uint32 0
+gap-outer=uint32 0
+hint-color-rgba='rgb(242,219,173)'
+tile-by-default=false
