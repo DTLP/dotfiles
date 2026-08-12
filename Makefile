@@ -1,8 +1,8 @@
 STOW := stow
 TARGET := ~
 
-ALL_PACKAGES := alacritty bash bin git kube music prettier talos tmux vim
-WORK_PACKAGES := alacritty bash bin git kube prettier tmux vim
+ALL_PACKAGES := alacritty bash bin git music prettier tmux vim
+WORK_PACKAGES := alacritty bash bin git prettier tmux vim
 
 .PHONY: stow-all stow-work unstow-all unstow-work
 

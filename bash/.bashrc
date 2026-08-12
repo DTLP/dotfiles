@@ -50,10 +50,10 @@ fi
 # kubectl autocomplete
 if command -v brew &>/dev/null; then
   source /opt/homebrew/Cellar/bash-completion@2/2.11/share/bash-completion/bash_completion
-else
+elif [[ -f ~/.kube/kubectl_autocompletion ]]; then
   source ~/.kube/kubectl_autocompletion
 fi
-complete -o default -F __start_kubectl k
+complete -o default -F __start_kubectl k 2>/dev/null || true
 
 # opencode ########################################################################################
 export PATH=$HOME/.opencode/bin:$PATH
@@ -102,7 +102,7 @@ if grep -q 'Pop!_OS' /etc/os-release; then
 fi
 
 # TALOS ###########################################################################################
-source ~/.talos/talosctl_autocompletion
+[[ -f ~/.talos/talosctl_autocompletion ]] && source ~/.talos/talosctl_autocompletion
 
 # FUNCTIONS #######################################################################################
 # Check certificates
