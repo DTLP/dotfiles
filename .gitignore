@@ -1,5 +1,0 @@
-.config/nvim/lazy-lock.json
-.kube/cache
-.kube/config
-.talos/config
-.vim/undodir
