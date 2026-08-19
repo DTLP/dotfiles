@@ -48,6 +48,7 @@ flatpak_apps=(
 
 other_apps=(
   dropbox
+  talhelper
   telegram
   terraform
 )
