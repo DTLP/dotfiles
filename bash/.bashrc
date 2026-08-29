@@ -196,6 +196,7 @@ function git-branch() {
     ;;
   esac
 }
+complete -W "delete reset" git-branch
 
 # OTHER ###########################################################################################
 ## protontricks
