@@ -66,33 +66,43 @@ complete -o default -F __start_kubectl k 2>/dev/null || true
 export PATH=$HOME/.opencode/bin:$PATH
 alias oc='opencode'
 
-## ARGO CD ########################################################################################
+# ARGO CD #########################################################################################
 # Turns Argo on/off in Namespaces
+# $1 cluster
+# $2 namespace
+# $3 on/off/hard-refresh/status switch
+# Turns Argo on/off in Namespaces
+# -- Add this to your ~/.bashrc or ~/.bash_profile
 # $1 cluster
 # $2 namespace
 # $3 on/off/hard-refresh/status switch
 argoctl() {
   if [[ -z $1 || -z $2 || -z ${3:-} ]]; then
-    echo "Usage: argoctl CLUSTER NAMESPACE {on|off|hr|hard-refresh}"
+    echo "Usage: argoctl CLUSTER NAMESPACE {on|off|hr|hard-refresh|status}"
     return 1
   fi
 
   case "$3" in
   'on')
-    kubectl --context "$1" -n "$2" patch --type='merge' applications.argoproj.io "$2" -p '{"spec":{"syncPolicy":{"automated":{"prune":true,"selfHeal":true}}}}'
+    kubectl --context "$1" -n "$2" patch --type='merge' applications.argoproj.io "$2" -p '{"spec":{"syncPolicy":{"automated":{"enabled": true,"selfHeal":true}}}}'
     ;;
   'off')
-    kubectl --context "$1" -n "$2" patch --type='merge' applications.argoproj.io "$2" -p '{"spec":{"syncPolicy":{"automated":null}}}'
+    kubectl --context "$1" -n "$2" patch --type='merge' applications.argoproj.io "$2" -p '{"spec":{"syncPolicy":{"automated":{"enabled": false}}}}'
     ;;
   'hr' | 'hard-refresh')
     kubectl --context "$1" -n "$2" annotate app "$2" 'argocd.argoproj.io/refresh=hard' --overwrite
     ;;
   'status')
-    if kubectl --context "$1" -n "$2" get applications.argoproj.io "$2" -o jsonpath='{.spec.syncPolicy.automated}' | grep -q .; then echo "Enabled"; else echo "Disabled"; fi
+    kubectl --context "$1" -n "$2" get applications.argoproj.io "$2" -o json |
+      jq -r 'if .spec.syncPolicy.automated == null then
+          "Sync: Disabled"
+        else
+          "Sync: \(.spec.syncPolicy.automated.enabled), Prune: \(.spec.syncPolicy.automated.prune), SelfHeal: \(.spec.syncPolicy.automated.selfHeal)"
+        end'
     ;;
   *)
     echo "Invalid option: $3"
-    echo "Usage: argoctl CLUSTER NAMESPACE {on|off|hr|hard-refresh}"
+    echo "Usage: argoctl CLUSTER NAMESPACE {on|off|hr|hard-refresh|status}"
     return 1
     ;;
   esac
