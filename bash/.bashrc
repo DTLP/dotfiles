@@ -121,6 +121,34 @@ fi
 # TALOS ###########################################################################################
 [[ -f ~/.talos/talosctl_autocompletion ]] && source ~/.talos/talosctl_autocompletion
 
+# TERRAFORM-APPLIER ###############################################################################
+# Trigger terraform-applier runs by annotating module resource
+# -- Add this to your ~/.bashrc or ~/.bash_profile
+# $1 cluster
+# $2 namespace
+# $3 module name
+# $3 plan|apply switch
+tf-applier() {
+  if [[ -z $1 || -z $2 || -z $3 || -z ${4:-} ]]; then
+    echo "Usage: tf-applier CLUSTER NAMESPACE MODULE {plan|apply}"
+    return 1
+  fi
+
+  case "$4" in
+  'plan')
+    kubectl --context "$1" -n "$2" annotate module "$3" --overwrite terraform-applier.uw.systems/run-request="{\"reqAt\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"type\":\"ForcedPlan\"}"
+    ;;
+  'apply')
+    kubectl --context "$1" -n "$2" annotate module "$3" --overwrite terraform-applier.uw.systems/run-request="{\"reqAt\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"type\":\"ForcedApply\"}"
+    ;;
+  *)
+    echo "Invalid option: $4"
+    echo "Usage: tf-applier CLUSTER NAMESPACE MODULE {plan|apply}"
+    return 1
+    ;;
+  esac
+}
+
 # FUNCTIONS #######################################################################################
 # Check certificates
 function certg() {
